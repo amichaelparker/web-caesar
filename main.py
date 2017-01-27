@@ -64,13 +64,12 @@ class MainHandler(webapp2.RequestHandler):
         message = self.request.get("message")
         rotation = self.request.get("rotation")
 
-        escaped_message = cgi.escape(message)
-
         if rotation.isdigit():
-            encrypted_message = caesar.encrypt(escaped_message, int(rotation))
+            encrypted_message = caesar.encrypt(message, int(rotation))
         else:
-            encrypted_message = caesar.encrypt(escaped_message, 0)
-
+            encrypted_message = caesar.encrypt(message, 0)
+        
+        encrypted_message = cgi.escape(encrypted_message)
         content = build_page(encrypted_message)
 
         self.response.write(content)
