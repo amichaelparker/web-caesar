@@ -14,11 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import cgi
 import webapp2
 import caesar
-import cgi
 
 def build_page(textarea_content):
+    '''
+    Build core document page
+    '''
+
+    title = '<head><title>Web Caesar</title></head>'
     header = '<h2>Web Caesar</h2>'
 
     rot_label = '<label style="margin-right: 44px">Rotate by:</label>'
@@ -34,15 +39,27 @@ def build_page(textarea_content):
             rot_label + rotation_input + '<br>' +
             '<br>' + message_label + textarea + '<br>' +
             '<br>' + submit + '</form>')
-    return header + form
+    return title + header + form
 
 class MainHandler(webapp2.RequestHandler):
+    '''
+    Main page handler for GAE
+    '''
+
     def get(self):
+        '''
+        GET function for main page
+        '''
+
         content = build_page("")
 
         self.response.write(content)
 
     def post(self):
+        '''
+        POST function for sending message to encrypt
+        '''
+
         message = self.request.get("message")
         rotation = self.request.get("rotation")
 
