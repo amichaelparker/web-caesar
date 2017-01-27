@@ -39,11 +39,12 @@ def build_page(textarea_content):
             rot_label + rotation_input + '<br>' +
             '<br>' + message_label + textarea + '<br>' +
             '<br>' + submit + '</form>')
+
     return title + header + form
 
 class MainHandler(webapp2.RequestHandler):
     '''
-    Main page handler for GAE
+    Main page handler class for GAE
     '''
 
     def get(self):
@@ -73,6 +74,7 @@ class MainHandler(webapp2.RequestHandler):
         content = build_page(encrypted_message)
 
         self.response.write(content)
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
