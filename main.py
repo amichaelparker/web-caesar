@@ -68,7 +68,7 @@ class MainHandler(webapp2.RequestHandler):
             encrypted_message = caesar.encrypt(message, int(rotation))
         else:
             encrypted_message = caesar.encrypt(message, 0)
-        
+
         encrypted_message = cgi.escape(encrypted_message)
         content = build_page(encrypted_message)
 
